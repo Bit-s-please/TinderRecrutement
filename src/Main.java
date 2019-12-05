@@ -1,7 +1,9 @@
 public class Main {
 
     public static void main(String[] args) {
-	// write your code here
-    	System.out.println("Hello world");
+    	Profil test = new Profil("./XMLExamples/test1.xml");
+
+    	System.out.println(test.getNom());
+
     }
 }

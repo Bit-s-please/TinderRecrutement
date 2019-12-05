@@ -11,6 +11,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Profil {
@@ -28,6 +29,10 @@ public class Profil {
 
     //Constructeurs
     public Profil(String chemin){
+        profilRecherche = new ArrayList<String>();
+        missions = new ArrayList<String>();
+        technos = new ArrayList<Techno>();
+
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 
         try{
@@ -43,39 +48,53 @@ public class Profil {
                 Node node = nodes.item(i);
                 switch (node.getNodeName()){
                     case "title":
-                        setNom(node.getNodeValue());
+                        setNom(node.getTextContent());
                         break;
                     case "duree":
-                        setDuree(node.getNodeValue());
+                        setDuree(node.getTextContent());
                         break;
                     case "ville":
-                        setVille(node.getNodeValue());
+                        setVille(node.getTextContent());
                         break;
                     case "contexte":
-                        setContexte(node.getNodeValue());
+                        setContexte(node.getTextContent());
                         break;
                     case "profil":
-                        addProfilRecherche(node.getNodeValue());
+                        NodeList points = node.getChildNodes();
+                        for (int j = 0; j<points.getLength(); j++){
+                             Node n = points.item(j);
+                             if (n.getNodeName() == "point") {
+                                 addProfilRecherche(n.getTextContent());
+                             }
+                        }
                         break;
                     case "missions":
-                        addMission(node.getNodeValue());
+                        NodeList missions = node.getChildNodes();
+                        for (int j = 0; j<missions.getLength(); j++){
+                            Node n = missions.item(j);
+                            if (n.getNodeName() == "mission") {
+                                addMission(n.getTextContent());
+                            }
+                        }
                         break;
                     case "technos":
                         NodeList technos = node.getChildNodes();
-                        Techno techno = new Techno();
                         for (int j = 0; j<technos.getLength(); j++){
-                            Node n = technos.item(j);
-                            if (n.getNodeName() == "nom") {
-                                techno.setNom(n.getNodeValue());
-                            }
-                            if (n.getNodeName() == "image") {
-                                Image logo = ImageIO.read(new File(n.getNodeValue()));
-                                techno.setLogo(logo);
+                            Techno techno = new Techno();
+                            NodeList t = technos.item(j).getChildNodes();
+                            for (int k = 0; k<t.getLength(); k++){
+                                Node n = t.item(k);
+                                if (n.getNodeName() == "nom"){
+                                    techno.setNom(n.getTextContent());
+                                }
+                                if (n.getNodeName() == "image"){
+                                    techno.setLogo(ImageIO.read(new File(n.getTextContent())));
+                                }
                             }
                         }
                         break;
                     case "contact":
-                        setContact(node.getNodeValue());
+                        setContact(node.getTextContent());
                         break;
                     default:
                         break;
