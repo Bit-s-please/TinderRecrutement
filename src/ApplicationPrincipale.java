@@ -1,9 +1,12 @@
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
 
+import java.awt.EventQueue;
 import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.GridBagConstraints;
@@ -13,15 +16,13 @@ import java.awt.Insets;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.Font;
+
 import java.io.File;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;
-import java.awt.Font;
 
 public class ApplicationPrincipale {
 
@@ -31,10 +32,16 @@ public class ApplicationPrincipale {
 	private final Color colorHover = new Color(169, 171, 184);
 	private final Color colorLeroyMerlin = new Color(121, 187, 48);
 	
+	public static int panelToDisplay = 1;
+	public static JPanel chatPanel;
+	public static JPanel matchPanel;
 	
 	//MATCH ELEMENTS :
-    public static List<Profil> offres;
+    public static List<Profil> offres = new ArrayList<Profil>();
     public static JLabel imageLabel = new JLabel();
+    public static JLabel labelNomDuPoste = new JLabel();
+    public static JLabel labelDuree = new JLabel();
+    public static JLabel labelVille = new JLabel();
     public static int indexProfilCourant = 0;
 
 	/**
@@ -43,16 +50,14 @@ public class ApplicationPrincipale {
 	public static void main(String[] args) {
 		
 		//Initialisation des fichiers :
-		File folder = new File("./XMLExamples/");
-        
+        File folder = new File("./XMLExamples/");
         List<String> filesPath = Controleur.listFilesForFolder(folder);
 
-        offres = new ArrayList<Profil>();
-
         for (String filePath : filesPath) {
-            offres.add(new Profil(filePath));
+            if(Controleur.getExtensionOfFile(filePath).equals("xml")){
+                offres.add(new Profil(filePath));
+            }
         }
-		
 		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -72,11 +77,42 @@ public class ApplicationPrincipale {
 	public ApplicationPrincipale() {
 		initialize();
 	}
+	
+	public static void getNextProfile() {
+		if(indexProfilCourant < offres.size()-1 ) {
+			indexProfilCourant++;
+			imageLabel.setIcon(new ImageIcon(offres.get(indexProfilCourant).getPicture()));
+			labelNomDuPoste.setText(offres.get(indexProfilCourant).getNom());;
+		    labelDuree.setText(offres.get(indexProfilCourant).getDuree());
+		    labelVille.setText(offres.get(indexProfilCourant).getVille());
+		}
+		else {
+			System.out.println("Plus d'offres disponibles !");
+		}
+	}
+	
+	public static void togglePanel() {
+		if(panelToDisplay == 0) {
+			chatPanel.setVisible(false);
+			matchPanel.setVisible(true);
+			panelToDisplay++;
+		}
+		else {
+			chatPanel.setVisible(true);
+			matchPanel.setVisible(false);
+			panelToDisplay--;
+		}
+	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+
+		imageLabel.setIcon(new ImageIcon(offres.get(0).getPicture()));
+		labelNomDuPoste.setText(offres.get(0).getNom());
+	    labelDuree.setText(offres.get(0).getDuree());
+	    labelVille.setText(offres.get(0).getVille());
 		
 		try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -96,7 +132,7 @@ public class ApplicationPrincipale {
 		gridBagLayout.rowWeights = new double[]{1.0, Double.MIN_VALUE};
 		frame.getContentPane().setLayout(gridBagLayout);
 		
-		JPanel matchPanel = new JPanel();
+		matchPanel = new JPanel();
 		matchPanel.setBackground(Color.WHITE);
 		GridBagConstraints gbc_matchPanel = new GridBagConstraints();
 		gbc_matchPanel.fill = GridBagConstraints.BOTH;
@@ -126,15 +162,15 @@ public class ApplicationPrincipale {
         gbl_topMenuPanel.rowWeights = new double[]{0.0, Double.MIN_VALUE};
         topMenuPanel.setLayout(gbl_topMenuPanel);
         
-        JLabel lblNewLabel = new JLabel();
-        lblNewLabel.setIcon(new ImageIcon(ApplicationPrincipale.class.getClassLoader().getResource("ressources/leroy_resized.png")));
-        lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
-        gbc_lblNewLabel.fill = GridBagConstraints.HORIZONTAL;
-        gbc_lblNewLabel.insets = new Insets(0, 0, 0, 5);
-        gbc_lblNewLabel.gridx = 1;
-        gbc_lblNewLabel.gridy = 0;
-        topMenuPanel.add(lblNewLabel, gbc_lblNewLabel);
+        JLabel leroyLogo = new JLabel();
+        leroyLogo.setIcon(new ImageIcon(ApplicationPrincipale.class.getClassLoader().getResource("ressources/leroy_resized.png")));
+        leroyLogo.setHorizontalAlignment(SwingConstants.CENTER);
+        GridBagConstraints gbc_leroyLogo = new GridBagConstraints();
+        gbc_leroyLogo.fill = GridBagConstraints.HORIZONTAL;
+        gbc_leroyLogo.insets = new Insets(0, 0, 0, 5);
+        gbc_leroyLogo.gridx = 1;
+        gbc_leroyLogo.gridy = 0;
+        topMenuPanel.add(leroyLogo, gbc_leroyLogo);
         
         JButton chatButton = new JButton("");
         chatButton.setToolTipText("Accéder au chat");
@@ -144,7 +180,7 @@ public class ApplicationPrincipale {
         chatButton.setIcon(imageIcon);
         chatButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				System.out.println("erign");
+				togglePanel();
             }
 		});
         chatButton.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -181,12 +217,10 @@ public class ApplicationPrincipale {
         matchImagePanel.setBackground(Color.WHITE);
         GridBagConstraints gbc_matchImagePanel = new GridBagConstraints();
         gbc_matchImagePanel.weighty = 90.0;
-        gbc_matchImagePanel.fill = GridBagConstraints.BOTH;
         gbc_matchImagePanel.gridx = 0;
         gbc_matchImagePanel.gridy = 0;
         matchBodyPanel.add(matchImagePanel, gbc_matchImagePanel);
 
-        //imageLabel.setIcon(offres.get(0).);
         matchImagePanel.add(imageLabel);
         
         JPanel matchDescriptionPanel = new JPanel(); // NOM DUREE VILLE
@@ -218,30 +252,27 @@ public class ApplicationPrincipale {
         gbl_insideOfMatchDescriptionPanel.rowWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
         insideOfMatchDescriptionPanel.setLayout(gbl_insideOfMatchDescriptionPanel);
         
-        JLabel lblNomDuPoste = new JLabel("NOM DU POSTE");
-        lblNomDuPoste.setFont(new Font("Franklin Gothic Heavy", Font.BOLD, 30));
+        labelNomDuPoste.setFont(new Font("Franklin Gothic Heavy", Font.BOLD, 30));
         GridBagConstraints gbc_lblNomDuPoste = new GridBagConstraints();
         gbc_lblNomDuPoste.anchor = GridBagConstraints.NORTHWEST;
         gbc_lblNomDuPoste.insets = new Insets(0, 0, 5, 0);
         gbc_lblNomDuPoste.gridx = 0;
         gbc_lblNomDuPoste.gridy = 0;
-        insideOfMatchDescriptionPanel.add(lblNomDuPoste, gbc_lblNomDuPoste);
+        insideOfMatchDescriptionPanel.add(labelNomDuPoste, gbc_lblNomDuPoste);
         
-        JLabel label_1 = new JLabel("DUREE");
         GridBagConstraints gbc_label_1 = new GridBagConstraints();
         gbc_label_1.anchor = GridBagConstraints.NORTHWEST;
         gbc_label_1.insets = new Insets(0, 0, 5, 0);
         gbc_label_1.gridx = 0;
         gbc_label_1.gridy = 1;
-        insideOfMatchDescriptionPanel.add(label_1, gbc_label_1);
+        insideOfMatchDescriptionPanel.add(labelDuree, gbc_label_1);
         
-        JLabel label_2 = new JLabel("VILLE");
         GridBagConstraints gbc_label_2 = new GridBagConstraints();
         gbc_label_2.fill = GridBagConstraints.HORIZONTAL;
         gbc_label_2.anchor = GridBagConstraints.NORTH;
         gbc_label_2.gridx = 0;
         gbc_label_2.gridy = 2;
-        insideOfMatchDescriptionPanel.add(label_2, gbc_label_2);
+        insideOfMatchDescriptionPanel.add(labelVille, gbc_label_2);
         
         JPanel bottomPanelSurrounder = new JPanel();
         bottomPanelSurrounder.setBackground(colorLeroyMerlin);
@@ -300,7 +331,7 @@ public class ApplicationPrincipale {
         dislikeButton.setIcon(new ImageIcon(new ImageIcon(ApplicationPrincipale.class.getClassLoader().getResource("ressources/dislike.png")).getImage().getScaledInstance(50, 46, Image.SCALE_DEFAULT)));
         dislikeButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				System.out.println("erign");
+				getNextProfile();
             }
 		});
         dislikeButton.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -332,7 +363,7 @@ public class ApplicationPrincipale {
         likeButton.setIcon(new ImageIcon(new ImageIcon(ApplicationPrincipale.class.getClassLoader().getResource("ressources/like.png")).getImage().getScaledInstance(50, 46, Image.SCALE_DEFAULT)));
         likeButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				System.out.println("erign");
+				getNextProfile();
             }
 		});
         likeButton.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -349,7 +380,7 @@ public class ApplicationPrincipale {
         gbc_likeButton.gridy = 0;
         bottomMatchPanel.add(likeButton, gbc_likeButton);
 		
-		JPanel chatPanel = new JPanel();
+        chatPanel = new JPanel();
 		chatPanel.setBackground(Color.WHITE);
 		GridBagConstraints gbc_chatPanel = new GridBagConstraints();
 		gbc_chatPanel.fill = GridBagConstraints.BOTH;
@@ -357,11 +388,67 @@ public class ApplicationPrincipale {
 		gbc_chatPanel.gridy = 0;
 		frame.getContentPane().add(chatPanel, gbc_chatPanel);
 		GridBagLayout gbl_chatPanel = new GridBagLayout();
-		gbl_chatPanel.columnWidths = new int[]{0};
-		gbl_chatPanel.rowHeights = new int[]{0};
-		gbl_chatPanel.columnWeights = new double[]{Double.MIN_VALUE};
-		gbl_chatPanel.rowWeights = new double[]{Double.MIN_VALUE};
+		gbl_chatPanel.columnWidths = new int[]{0, 0};
+		gbl_chatPanel.rowHeights = new int[]{0, 0};
+		gbl_chatPanel.columnWeights = new double[]{1.0, Double.MIN_VALUE};
+		gbl_chatPanel.rowWeights = new double[]{0.0, Double.MIN_VALUE};
 		chatPanel.setLayout(gbl_chatPanel);
+		
+		JPanel chatTopPanel = new JPanel();
+		chatTopPanel.setBackground(new Color(121, 187, 48));
+		GridBagConstraints gbc_chatTopPanel = new GridBagConstraints();
+		gbc_chatTopPanel.anchor = GridBagConstraints.NORTH;
+		gbc_chatTopPanel.fill = GridBagConstraints.HORIZONTAL;
+		gbc_chatTopPanel.gridx = 0;
+		gbc_chatTopPanel.gridy = 0;
+		chatPanel.add(chatTopPanel, gbc_chatTopPanel);
+		GridBagLayout gbl_chatTopPanel = new GridBagLayout();
+		gbl_chatTopPanel.columnWidths = new int[]{33, 33, 33, 0};
+		gbl_chatTopPanel.rowHeights = new int[]{47, 0};
+		gbl_chatTopPanel.columnWeights = new double[]{1.0, 1.0, 1.0, Double.MIN_VALUE};
+		gbl_chatTopPanel.rowWeights = new double[]{0.0, Double.MIN_VALUE};
+		chatTopPanel.setLayout(gbl_chatTopPanel);
+		
+		JLabel leroyLogo2 = new JLabel();
+		leroyLogo2.setIcon(new ImageIcon(ApplicationPrincipale.class.getClassLoader().getResource("ressources/leroy_resized.png")));
+		leroyLogo2.setHorizontalAlignment(SwingConstants.CENTER);
+		GridBagConstraints gbc_leroyLogo2 = new GridBagConstraints();
+		gbc_leroyLogo2.fill = GridBagConstraints.HORIZONTAL;
+		gbc_leroyLogo2.insets = new Insets(0, 0, 0, 5);
+		gbc_leroyLogo2.gridx = 1;
+		gbc_leroyLogo2.gridy = 0;
+		chatTopPanel.add(leroyLogo2, gbc_leroyLogo2);
+		
+		JButton chatButton2 = new JButton("");
+		chatButton2.setToolTipText("Accéder au chat");
+		chatButton2.setOpaque(true);
+		chatButton2.setBorder(null);
+		chatButton2.setBackground(colorLeroyMerlin);
+		chatButton2.setIcon(imageIcon);
+        chatButton2.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				togglePanel();
+            }
+		});
+        chatButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+		    public void mouseEntered(java.awt.event.MouseEvent evt) {
+		    	chatButton2.setBackground(colorHover);
+		    }
+
+		    public void mouseExited(java.awt.event.MouseEvent evt) {
+		    	chatButton2.setBackground(colorLeroyMerlin);
+		    }
+		});
+		chatButton2.setToolTipText("Acc\u00E9der au chat");
+		chatButton2.setOpaque(true);
+		chatButton2.setBorder(null);
+		chatButton2.setBackground(new Color(121, 187, 48));
+		GridBagConstraints gbc_chatButton2 = new GridBagConstraints();
+		gbc_chatButton2.insets = new Insets(5, 0, 5, 0);
+		gbc_chatButton2.anchor = GridBagConstraints.NORTHEAST;
+		gbc_chatButton2.gridx = 2;
+		gbc_chatButton2.gridy = 0;
+		chatTopPanel.add(chatButton2, gbc_chatButton2);
 		
 		
 		chatPanel.setVisible(false);
