@@ -582,6 +582,7 @@ public class ApplicationPrincipale {
 		
 		
 		String description = "Le contexte :\n";
+		
 	    description = description.concat(offres.get(indexProfilCourant).getContexte());
 	    description = description.concat("\n");
 	    description = description.concat("\n\nTes missions :\n");
