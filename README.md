@@ -1,38 +1,29 @@
 Participation du groupe "Bit's, please !" au défi Leroy Merlin de la nuit de l'info 2019.
+Cette application se prénomme "LeroyMatcheur", pas du tout inspiré par un réseau social de rencontre connu ccommençant par Tin et se finnissant par der...
+
+Pour que l'application fonctionne, il faut créer un dossier nommé "XMLOffres" dans lequel seront disposés les offres d'emplois au format XML.
 
 Format fichier <xml> d'offre d'emploi : 
 <?xml version="1.0" encoding="UTF-8"?>
 <Offre>
-	<title>DATA ENGINEER - STAGE</title>>
-	<duree>1 mois</duree>
-	<ville>Tours</ville>
-	<image></image>
-	<contexte>Au sein de l'équipe Supply IT, nous mettons en place une équipe sur la prévision de ventes (de la prévision initiale à la prévision fin de vie du produit). Pour renforcer l'équipe, nous proposons un stage de data engineer.</contexte>
+	<title>Titre dee stage</title>>
+	<duree>Durée de l'emploi / Stage</duree>
+	<ville>Ville</ville>
+	<image>Chemin vers l'image</image>
+	<contexte>Explication du poste</contexte>
 	<profil>
-		<point>Tu es issu(e) d'une formation supérieure IT</point>
-		<point>Tu as une appétence forte aux méthodes de prévisions de ventes</point>
-		<point>Tu as des connaissances sur Google Cloud Platform et python ou tu as envie d’apprendre</point>
-		<point>Tu es agile et force de proposition</point>
+		<point>Critère n°1 pour le profil recherché</point>
+		<point>Critère n°2 pour le profil recherché</point>
 	</profil>
 	<missions>
-		<mission>Tu travailles au côté des équipes métier</mission>
-		<mission>Tu développes de nouveaux algorithmes de prévisions</mission>
-		<mission>Tu maintiens les algorithmes existants et feras des évolutions</mission>
-		<mission>Tu assures la cohérence statistique entre les différents algorithmes de prévision. </mission>
+		<mission>Mission n°1 de l'emploi / stage</mission>
+		<mission>Mission n°2 de l'emploi / stage</mission>
 	</missions>
 	<technos>
 		<techno>
-			<nom>python</nom>
-			<image>chemin</image>
-		</techno>
-		<techno>
-			<nom>R</nom>
-			<image>chemin</image>
-		</techno>
-		<techno>
-			<nom>googleBigQuery</nom>
-			<image>chemin</image>
+			<nom>Nom d'une techno nécessaire</nom>
+			<image>Logo de cette techno</image>
 		</techno>
 	</technos>
-	<contact>m@leroymerlin.fr</contact>
+	<contact>mail ou contact vers la personne en charge de cette offre de recrutement</contact>
 </Offre>
