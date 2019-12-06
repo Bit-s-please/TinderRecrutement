@@ -8,6 +8,7 @@ import javax.imageio.ImageIO;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ public class Profil {
     String nom;
     String duree;
     String ville;
+    Image picture;
 
     String contexte;
     List<String> profilRecherche;
@@ -54,6 +56,9 @@ public class Profil {
                         break;
                     case "ville":
                         setVille(node.getTextContent());
+                        break;
+                    case "image":
+                        setPicture(node.getTextContent());
                         break;
                     case "contexte":
                         setContexte(node.getTextContent());
@@ -115,16 +120,28 @@ public class Profil {
     public String getNom(){return nom;}
     public String getDuree(){return duree;}
     public String getVille(){return ville;}
+    public Image getPicture(){return picture;}
 
     public String getContexte(){return contexte;}
     public String getProfilRecherche(int index){return profilRecherche.get(index);}
+    public int getProfilRechercheLength(){return profilRecherche.size();}
     public String getMission(int index){return missions.get(index);}
+    public int getMissionLength(){return missions.size();}
     public Techno getTechno(int index){return technos.get(index);}
+    public int getTechnoLength(){return technos.size();}
     public String getContact() {return contact; }
+
 
     public void setNom(String nom){this.nom = nom;}
     public void setDuree(String duree){this.duree = duree;}
     public void setVille(String ville){this.ville = ville;}
+    public void setPicture(String picturePath){
+        try{
+            this.picture = ImageIO.read(new File(picturePath));
+        } catch(IOException e){
+            e.printStackTrace();
+        }
+    }
 
     public void setContexte(String contexte){this.contexte = contexte;}
 
