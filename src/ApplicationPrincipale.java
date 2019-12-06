@@ -13,12 +13,15 @@ import java.awt.Insets;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import java.awt.FlowLayout;
 import javax.swing.SwingConstants;
+import java.awt.Font;
 
 public class ApplicationPrincipale {
 
@@ -27,11 +30,30 @@ public class ApplicationPrincipale {
 	
 	private final Color colorHover = new Color(169, 171, 184);
 	private final Color colorLeroyMerlin = new Color(121, 187, 48);
+	
+	
+	//MATCH ELEMENTS :
+    public static List<Profil> offres;
+    public static JLabel imageLabel = new JLabel();
+    public static int indexProfilCourant = 0;
 
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
+		
+		//Initialisation des fichiers :
+		File folder = new File("./XMLExamples/");
+        
+        List<String> filesPath = Controleur.listFilesForFolder(folder);
+
+        offres = new ArrayList<Profil>();
+
+        for (String filePath : filesPath) {
+            offres.add(new Profil(filePath));
+        }
+		
+		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -100,7 +122,7 @@ public class ApplicationPrincipale {
         GridBagLayout gbl_topMenuPanel = new GridBagLayout();
         gbl_topMenuPanel.columnWidths = new int[]{33, 33, 33, 0};
         gbl_topMenuPanel.rowHeights = new int[]{47, 0};
-        gbl_topMenuPanel.columnWeights = new double[]{0.0, 1.0, 0.0, Double.MIN_VALUE};
+        gbl_topMenuPanel.columnWeights = new double[]{1.0, 1.0, 1.0, Double.MIN_VALUE};
         gbl_topMenuPanel.rowWeights = new double[]{0.0, Double.MIN_VALUE};
         topMenuPanel.setLayout(gbl_topMenuPanel);
         
@@ -136,7 +158,7 @@ public class ApplicationPrincipale {
 		});
         GridBagConstraints gbc_chatButton = new GridBagConstraints();
         gbc_chatButton.insets = new Insets(5, 0, 5, 0);
-        gbc_chatButton.anchor = GridBagConstraints.NORTHWEST;
+        gbc_chatButton.anchor = GridBagConstraints.NORTHEAST;
         gbc_chatButton.gridx = 2;
         gbc_chatButton.gridy = 0;
         topMenuPanel.add(chatButton, gbc_chatButton);
@@ -144,11 +166,82 @@ public class ApplicationPrincipale {
         JPanel matchBodyPanel = new JPanel();
         matchBodyPanel.setBackground(Color.WHITE);
         GridBagConstraints gbc_matchBodyPanel = new GridBagConstraints();
-        gbc_matchBodyPanel.insets = new Insets(0, 0, 5, 0);
         gbc_matchBodyPanel.fill = GridBagConstraints.BOTH;
         gbc_matchBodyPanel.gridx = 0;
         gbc_matchBodyPanel.gridy = 1;
         matchPanel.add(matchBodyPanel, gbc_matchBodyPanel);
+        GridBagLayout gbl_matchBodyPanel = new GridBagLayout();
+        gbl_matchBodyPanel.columnWidths = new int[]{249, 0};
+        gbl_matchBodyPanel.rowHeights = new int[]{0, 0, 0};
+        gbl_matchBodyPanel.columnWeights = new double[]{1.0, Double.MIN_VALUE};
+        gbl_matchBodyPanel.rowWeights = new double[]{1.0, 1.0, Double.MIN_VALUE};
+        matchBodyPanel.setLayout(gbl_matchBodyPanel);
+        
+        JPanel matchImagePanel = new JPanel();
+        matchImagePanel.setBackground(Color.WHITE);
+        GridBagConstraints gbc_matchImagePanel = new GridBagConstraints();
+        gbc_matchImagePanel.weighty = 80.0;
+        gbc_matchImagePanel.fill = GridBagConstraints.BOTH;
+        gbc_matchImagePanel.gridx = 0;
+        gbc_matchImagePanel.gridy = 0;
+        matchBodyPanel.add(matchImagePanel, gbc_matchImagePanel);
+
+        //imageLabel.setIcon(offres.get(0).);
+        matchImagePanel.add(imageLabel);
+        
+        JPanel matchDescriptionPanel = new JPanel(); // NOM DUREE VILLE
+        matchDescriptionPanel.setBackground(Color.LIGHT_GRAY);
+        GridBagConstraints gbc_matchDescriptionPanel = new GridBagConstraints();
+        gbc_matchDescriptionPanel.weighty = 20.0;
+        gbc_matchDescriptionPanel.fill = GridBagConstraints.BOTH;
+        gbc_matchDescriptionPanel.gridx = 0;
+        gbc_matchDescriptionPanel.gridy = 1;
+        matchBodyPanel.add(matchDescriptionPanel, gbc_matchDescriptionPanel);
+        GridBagLayout gbl_matchDescriptionPanel = new GridBagLayout();
+        gbl_matchDescriptionPanel.columnWidths = new int[]{0, 0};
+        gbl_matchDescriptionPanel.rowHeights = new int[]{0, 0};
+        gbl_matchDescriptionPanel.columnWeights = new double[]{1.0, Double.MIN_VALUE};
+        gbl_matchDescriptionPanel.rowWeights = new double[]{1.0, Double.MIN_VALUE};
+        matchDescriptionPanel.setLayout(gbl_matchDescriptionPanel);
+        
+        JPanel insideOfMatchDescriptionPanel = new JPanel();
+        GridBagConstraints gbc_insideOfMatchDescriptionPanel = new GridBagConstraints();
+        gbc_insideOfMatchDescriptionPanel.insets = new Insets(10, 10, 10, 10);
+        gbc_insideOfMatchDescriptionPanel.fill = GridBagConstraints.BOTH;
+        gbc_insideOfMatchDescriptionPanel.gridx = 0;
+        gbc_insideOfMatchDescriptionPanel.gridy = 0;
+        matchDescriptionPanel.add(insideOfMatchDescriptionPanel, gbc_insideOfMatchDescriptionPanel);
+        GridBagLayout gbl_insideOfMatchDescriptionPanel = new GridBagLayout();
+        gbl_insideOfMatchDescriptionPanel.columnWidths = new int[]{216, 0};
+        gbl_insideOfMatchDescriptionPanel.rowHeights = new int[]{14, 0, 0, 0};
+        gbl_insideOfMatchDescriptionPanel.columnWeights = new double[]{1.0, Double.MIN_VALUE};
+        gbl_insideOfMatchDescriptionPanel.rowWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
+        insideOfMatchDescriptionPanel.setLayout(gbl_insideOfMatchDescriptionPanel);
+        
+        JLabel lblNomDuPoste = new JLabel("NOM DU POSTE");
+        lblNomDuPoste.setFont(new Font("Franklin Gothic Heavy", Font.BOLD, 30));
+        GridBagConstraints gbc_lblNomDuPoste = new GridBagConstraints();
+        gbc_lblNomDuPoste.anchor = GridBagConstraints.NORTHWEST;
+        gbc_lblNomDuPoste.insets = new Insets(0, 0, 5, 0);
+        gbc_lblNomDuPoste.gridx = 0;
+        gbc_lblNomDuPoste.gridy = 0;
+        insideOfMatchDescriptionPanel.add(lblNomDuPoste, gbc_lblNomDuPoste);
+        
+        JLabel label_1 = new JLabel("DUREE");
+        GridBagConstraints gbc_label_1 = new GridBagConstraints();
+        gbc_label_1.anchor = GridBagConstraints.NORTHWEST;
+        gbc_label_1.insets = new Insets(0, 0, 5, 0);
+        gbc_label_1.gridx = 0;
+        gbc_label_1.gridy = 1;
+        insideOfMatchDescriptionPanel.add(label_1, gbc_label_1);
+        
+        JLabel label_2 = new JLabel("VILLE");
+        GridBagConstraints gbc_label_2 = new GridBagConstraints();
+        gbc_label_2.fill = GridBagConstraints.HORIZONTAL;
+        gbc_label_2.anchor = GridBagConstraints.NORTH;
+        gbc_label_2.gridx = 0;
+        gbc_label_2.gridy = 2;
+        insideOfMatchDescriptionPanel.add(label_2, gbc_label_2);
         
         JPanel bottomPanelSurrounder = new JPanel();
         bottomPanelSurrounder.setBackground(colorLeroyMerlin);

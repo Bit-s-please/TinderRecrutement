@@ -5,7 +5,9 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) {
+    	
         File folder = new File("./XMLExamples/");
+        
         List<String> filesPath = Controleur.listFilesForFolder(folder);
 
         List<Profil> offres = new ArrayList<Profil>();
@@ -17,7 +19,6 @@ public class Main {
         for (int i = 0; i < offres.size(); i++){
             System.out.println(offres.get(i).getNom());
         }
-
 
     }
 
