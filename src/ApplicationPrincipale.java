@@ -518,6 +518,7 @@ public class ApplicationPrincipale {
 		gbc_leroyLogo2.insets = new Insets(0, 15, 0, 5);
 		gbc_leroyLogo2.gridx = 0;
 		gbc_leroyLogo2.gridy = 0;
+		
 		chatTopPanel.add(leroyLogo2, gbc_leroyLogo2);
 		
 		chatButton2 = new JButton("");
