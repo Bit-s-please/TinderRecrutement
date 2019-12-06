@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Offre>
+	<title>DEVOPS - STAGE</title>>
+	<duree>8 semaines</duree>
+	<ville>Tours</ville>
+    <image>./XMLPictures/pp2.jpg</image>
+	<contexte>Au sein de l’équipe OFFER Leroy Merlin, tu seras en charge de l’analyse du besoin,
+    du développement et du déploiement d’une application pour des services internes
+    et magasins.</contexte>
+	<profil>
+		<point>Tu es BAC+4 issu(e) d’une formation supérieure</point>
+		<point>Tu possèdes un goût prononcé pour la gestion de systèmes d’information et pour
+        l’innovation</point>
+		<point>Tu as des connaissances sur Google Cloud Platform et python ou tu as envie d’apprendre</point>
+		<point>Tu es agile et force de proposition</point>
+	</profil>
+	<missions>
+		<mission>Tu travailles au côté des équipes métier</mission>
+		<mission>Tu développes de nouveaux algorithmes de prévisions</mission>
+		<mission>Tu es agile, force de proposition et excellent communicant</mission>
+		<mission>• Tu es proactif et tu sais projeter tes activités dans un contexte en perpétuelle évolution.</mission>
+	</missions>
+	<contact>l.fovez@leroymerlin.fr</contact>
+</Offre>

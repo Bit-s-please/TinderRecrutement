@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Offre>
+	<title>ASSISTANT CHEF DE PROJET - STAGE</title>>
+	<duree>18 semaines</duree>
+	<ville>Paris</ville>
+    <image>./XMLPictures/pp3.jpg</image>
+	<contexte>Au sein de l'équipe Supply IT, nous déployons diverses applications autour de
+    l’entrepôt et du transport. Pour documenter et accompagner le passage au RUN de
+    ces applications, nous recherchons un assistant chef de projet. </contexte>
+	<profil>
+		<point>Tu es issu(e) d'une formation supérieure IT </point>
+		<point>Tu es autonome et organisé </point>
+		<point>Tu as une appétence pour la logistique</point>
+		<point>Tu es synthétique et à l’aise dans la rédaction de documentation.</point>
+	</profil>
+	<missions>
+		<mission>Tu travailles au côté des équipes projet IT et RUN</mission>
+		<mission>Tu développeras des extractions vers les autres produits de l’écosystème Leroy Merlin </mission>
+		<mission>Tu participeras aux chantiers techniques de supervision, automatisation des déploiements et plan de production</mission>
+		<mission>Tu seras chargé(e) de documenter et de vulgariser les procédures IT pour le RUN  </mission>
+        <mission>Tu rédigeras des cahiers de recette IT de non-régression à destination du RUN  </mission>
+        <mission>Tu cartographieras les flux et les process IT</mission>
+	</missions>
+	<contact>j.r@leroymerlin.fr</contact>
+</Offre>
