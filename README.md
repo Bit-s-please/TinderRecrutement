@@ -6,6 +6,7 @@ Format fichier <xml> d'offre d'emploi :
 	<title>DATA ENGINEER - STAGE</title>>
 	<duree>1 mois</duree>
 	<ville>Tours</ville>
+	<image></image>
 	<contexte>Au sein de l'équipe Supply IT, nous mettons en place une équipe sur la prévision de ventes (de la prévision initiale à la prévision fin de vie du produit). Pour renforcer l'équipe, nous proposons un stage de data engineer.</contexte>
 	<profil>
 		<point>Tu es issu(e) d'une formation supérieure IT</point>
