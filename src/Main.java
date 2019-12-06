@@ -5,7 +5,7 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) {
-        File folder = new File("./XMLExamples/");
+        File folder = new File("./XMLOffres/");
         List<String> filesPath = Controleur.listFilesForFolder(folder);
 
         List<Profil> offres = new ArrayList<Profil>();

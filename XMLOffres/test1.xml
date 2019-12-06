@@ -17,5 +17,14 @@
 		<mission>Tu maintiens les algorithmes existants et feras des évolutions</mission>
 		<mission>Tu assures la cohérence statistique entre les différents algorithmes de prévision. </mission>
 	</missions>
+<<<<<<< HEAD
+=======
+	<technos>
+		<techno>
+			<nom>python</nom>
+			<image>./XMLPictures/pyth.png</image>
+		</techno>
+	</technos>
+>>>>>>> facf6b8e28d4686b179715aef74e385b9ad341b8
 	<contact>m@leroymerlin.fr</contact>
 </Offre>

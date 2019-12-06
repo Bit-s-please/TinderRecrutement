@@ -29,6 +29,10 @@ public class Profil {
     String contact;
 
     //Constructeurs
+
+    /*
+    Constructeur qui prend un chemin d'un fichier xml, le parse et remplie les champs correspondants
+     */
     public Profil(String chemin){
         profilRecherche = new ArrayList<String>();
         missions = new ArrayList<String>();
