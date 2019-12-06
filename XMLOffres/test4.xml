@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Offre>
+	<title>ENGINEER BI - STAGE</title>>
+	<duree>10 semaines</duree>
+	<ville>Nantes</ville>
+    <image>./XMLPictures/pp4.jpg</image>
+	<contexte>Participation à l’alimentation et à l’exploitation de la Data Platform</contexte>
+	<profil>
+		<point>Tu es issu(e) d’une formation supérieure</point>
+		<point>Tu es dynamique, autonome et curieux/curieuse</point>
+		<point>Tu possèdes une vraie aisance relationnelle</point>
+		<point>Tu es agile et force de proposition</point>
+	</profil>
+	<missions>
+		<mission>Tu travailles au contact des équipes métiers</mission>
+		<mission>Tu proposes des solutions techniques innovantes</mission>
+		<mission>Tu modélises et construis le socle Data</mission>
+		<mission>La data n’a plus de secret pour toi </mission>
+	</missions>
+	<technos>
+		<techno>
+			<nom>python</nom>
+			<image>./XMLPictures/pyth.png</image>
+		</techno>
+	</technos>
+	<contact>m.k@leroymerlin.fr</contact>
+</Offre>
