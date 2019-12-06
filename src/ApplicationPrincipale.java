@@ -180,7 +180,7 @@ public class ApplicationPrincipale {
         JPanel matchImagePanel = new JPanel();
         matchImagePanel.setBackground(Color.WHITE);
         GridBagConstraints gbc_matchImagePanel = new GridBagConstraints();
-        gbc_matchImagePanel.weighty = 80.0;
+        gbc_matchImagePanel.weighty = 90.0;
         gbc_matchImagePanel.fill = GridBagConstraints.BOTH;
         gbc_matchImagePanel.gridx = 0;
         gbc_matchImagePanel.gridy = 0;
