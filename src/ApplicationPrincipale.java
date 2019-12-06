@@ -117,13 +117,13 @@ public class ApplicationPrincipale {
 			String description = "Le contexte :\n";
 		    description = description.concat(offres.get(indexProfilCourant).getContexte());
 		    description = description.concat("\n");
-		    description = description.concat("\n\nTes missions :");
+		    description = description.concat("\n\nTes missions :\n");
 		    
 		    for(int i=0; i<offres.get(indexProfilCourant).getMissionLength(); i++) {
 		    	description = description.concat(offres.get(indexProfilCourant).getMission(i));
 		    	description = description.concat("\n");
 		    }
-		    description = description.concat("\n\nTon profil :");
+		    description = description.concat("\n\nTon profil :\n");
 		    
 		    for(int i=0; i<offres.get(indexProfilCourant).getProfilRechercheLength(); i++) {
 		    	description = description.concat(offres.get(indexProfilCourant).getProfilRecherche(i));
@@ -584,13 +584,13 @@ public class ApplicationPrincipale {
 		String description = "Le contexte :\n";
 	    description = description.concat(offres.get(indexProfilCourant).getContexte());
 	    description = description.concat("\n");
-	    description = description.concat("\n\nTes missions :");
+	    description = description.concat("\n\nTes missions :\n");
 	    
 	    for(int i=0; i<offres.get(indexProfilCourant).getMissionLength(); i++) {
 	    	description = description.concat(offres.get(indexProfilCourant).getMission(i));
 	    	description = description.concat("\n");
 	    }
-	    description = description.concat("\n\nTon profil :");
+	    description = description.concat("\n\nTon profil :\n");
 	    
 	    for(int i=0; i<offres.get(indexProfilCourant).getProfilRechercheLength(); i++) {
 	    	description = description.concat(offres.get(indexProfilCourant).getProfilRecherche(i));
